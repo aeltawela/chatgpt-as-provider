@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.9
+
+- Refresh the README with a quick start, clearer mode comparison, harness install paths, privacy guidance and colorful terminal screenshot/GIF examples.
+
 ## 0.1.8
 
 - Keep opaque account aliases functional for account selection and sign-out without exposing identity subjects.

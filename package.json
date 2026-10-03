@@ -1,6 +1,6 @@
 {
   "name": "chatgpt-as-provider",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "description": "Encapsulated ChatGPT OAuth plugin for coding agents: consultation tools, skills and provider gateway.",
   "type": "module",
   "license": "MIT",

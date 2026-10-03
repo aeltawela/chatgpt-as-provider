@@ -1,6 +1,55 @@
 # chatgpt-as-provider
 
-Use your ChatGPT account from coding agents in two ways: ask ChatGPT for a second opinion while your current agent remains in charge, or use ChatGPT as the agent's model provider. Sign-in and inference use OpenAI's documented OAuth flow for open-source applications.
+Ask ChatGPT from your coding agent—or let ChatGPT power the agent loop—using your existing ChatGPT sign-in.
+
+No API key juggling. No copied transcripts by default. One install gives you the shared OAuth core, consultation tools, provider gateway, model discovery, streaming, attachments, citations and tool-call handoffs.
+
+<p align="center">
+  <img src="assets/terminal-demo.png" alt="Colorful terminal showing a ChatGPT consultation about a judgmental TODO list" width="900">
+</p>
+
+<p align="center"><em>“Because it has seen your ‘temporary’ fix live for 18 months.”</em></p>
+
+<p align="center">
+  <a href="https://github.com/aeltawela/chatgpt-as-provider/actions/workflows/ci.yml"><img src="https://github.com/aeltawela/chatgpt-as-provider/actions/workflows/ci.yml/badge.svg" alt="CI status"></a>
+  <a href="https://github.com/aeltawela/chatgpt-as-provider/releases"><img src="https://img.shields.io/github/v/release/aeltawela/chatgpt-as-provider?display_name=tag" alt="Latest release"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-4fd1c5.svg" alt="MIT license"></a>
+</p>
+
+## Pick your mode
+
+| Mode | What happens | Use it when |
+|---|---|---|
+| **Ask ChatGPT** | Your current agent stays in charge and ChatGPT returns an answer, citation or proposed tool call. | You want a second opinion, review or fresh idea. |
+| **ChatGPT as provider** | A loopback gateway lets a supported harness route its main model requests through ChatGPT OAuth. | You explicitly want ChatGPT to run the model loop. |
+
+They share one login and one core. Consultation is temporary unless you explicitly persist a session.
+
+## Quick start
+
+The shortest Qwen Code path looks like this:
+
+```sh
+# 1. Install the one extension
+qwen extensions install https://github.com/aeltawela/chatgpt-as-provider
+```
+
+Restart Qwen, call its bundled `chatgpt_login` tool, and finish the official browser sign-in. Then ask ChatGPT with the extension-qualified skill:
+
+```text
+/chatgpt-as-provider:ask-chatgpt Explain this error without touching my files.
+```
+
+The same extension contains both skills:
+
+- `ask-chatgpt` — a temporary second opinion while your agent keeps control.
+- `chatgpt-as-provider` — provider setup and loopback gateway guidance.
+
+The extension never needs a separate global MCP install. Its tools do not return your email address or OAuth identity to the agent.
+
+<p align="center">
+  <img src="assets/terminal-demo.gif" alt="Animated terminal demo of a temporary ChatGPT consultation" width="900">
+</p>
 
 **Privacy default:** question content stays in process memory and the upstream Responses request uses `store: false`. Sessions are saved locally only when `--persist` is explicit. OAuth credentials are stored locally in an encrypted owner-only file. The calling client can still keep its own transcript; this tool cannot control OpenAI retention policy.
 
@@ -8,7 +57,7 @@ Use your ChatGPT account from coding agents in two ways: ask ChatGPT for a secon
 
 Node.js 22 or newer. Sign in from an eligible ChatGPT account that grants the plan-usage permission. The OAuth flow does not require an OpenAI API key. `chatgpt-as-provider` uses only documented public OAuth and Responses endpoints.
 
-## Install as a harness plugin and sign in
+## Install in another harness
 
 Install it through the client’s normal extension or plugin manager. Each package includes the shared core, consultation tool, skills where supported, and OAuth-backed MCP tools or native tools. No separate global npm install or hand-copied MCP configuration is needed for consultation mode.
 
@@ -16,7 +65,7 @@ Install it through the client’s normal extension or plugin manager. Each packa
 |---|---|---|---|
 | Qwen Code | `qwen extensions install https://github.com/aeltawela/chatgpt-as-provider` | `qwen extensions update chatgpt-as-provider` | `qwen extensions uninstall chatgpt-as-provider` |
 | OpenCode | `opencode plugin add github:aeltawela/chatgpt-as-provider` | `opencode plugin update chatgpt-as-provider` | `opencode plugin remove chatgpt-as-provider` |
-| Pi | `pi install git:github.com/aeltawela/chatgpt-as-provider@v0.1.8` | `pi update --extensions` | `pi remove git:github.com/aeltawela/chatgpt-as-provider` |
+| Pi | `pi install git:github.com/aeltawela/chatgpt-as-provider@v0.1.9` | `pi update --extensions` | `pi remove git:github.com/aeltawela/chatgpt-as-provider` |
 | Gemini CLI | `gemini extensions install https://github.com/aeltawela/chatgpt-as-provider` | `gemini extensions update chatgpt-as-provider` | `gemini extensions uninstall chatgpt-as-provider` |
 | Claude Code | `claude plugin marketplace add aeltawela/chatgpt-as-provider` then `claude plugin install chatgpt-as-provider@chatgpt-as-provider` | `claude plugin update chatgpt-as-provider@chatgpt-as-provider` | `claude plugin uninstall chatgpt-as-provider@chatgpt-as-provider` |
 
