@@ -20,4 +20,4 @@
 17. Preserve streamed output items, text, citations and tool calls when the completion event omits them. Require upstream completion and never retry an uncertain outcome.
 18. Provide a direct Qwen consultation command that invokes the MCP tool without depending on the failing extension Skill lookup.
 19. Automated secret scanning must run on both push and pull-request events with the built-in read-only GitHub token, without posting comments.
-20. The internal `ask-chatgpt` skill remains installed for model invocation but is hidden from Qwen's direct slash-command menu; `/chatgpt-ask` is the single user-facing consultation command.
+20. Qwen exposes one installed `chatgpt-as-provider` extension containing both qualified skills. Consultation is invoked as `/chatgpt-as-provider:ask-chatgpt`; no separate consultation command or extension is packaged.

@@ -4,7 +4,7 @@ Statuses: **Implemented** means a wrapper or protocol translator exists in this 
 
 | Client | Normal install / consultation wrapper | Provider protocol | Local status | Live client status |
 |---|---|---|---|---|
-| Qwen Code | Native extension + bundled stdio MCP, skills and direct command | OpenAI Chat Completions gateway | Manifest and tool contract tested | Live unverified |
+| Qwen Code | Native extension + bundled stdio MCP and two qualified skills | OpenAI Chat Completions gateway | Manifest and tool contract tested | Live unverified |
 | OpenCode | Git-installed package plugin registers both skills and native tools (v2); native tools (v1) | OpenAI Chat Completions gateway | v1/v2 entrypoints and tool/skill contracts tested | Live unverified |
 | Pi | Git-installed package with native tools and skills | OpenAI Chat Completions gateway | Package manifest and tool contract tested | Live unverified |
 | Gemini CLI | Native extension with bundled stdio MCP and skills | Gemini `generateContent` gateway | Manifest and tool contract tested | Live unverified |

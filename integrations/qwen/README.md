@@ -12,13 +12,13 @@ If the browser callback is unavailable, use the local hidden-input fallback from
 
 ## Ask ChatGPT
 
-After updating and restarting Qwen, use:
+After updating and restarting Qwen, use the extension-qualified skill:
 
 ```text
-/chatgpt-ask What can you do for me?
+/chatgpt-as-provider:ask-chatgpt What can you do for me?
 ```
 
-This packaged command calls MCP directly. Some Qwen skill invocations resolve the extension's qualified skill to the bare `ask-chatgpt` name and fail with “Skill not found”; `/chatgpt-ask` bypasses that lookup. Both skills remain bundled. Do not claim the bare skill name is registered.
+This is the only user-facing consultation entry in the extension. The same package also contains the `chatgpt-as-provider` provider-configuration skill. Do not use the bare `ask-chatgpt` name; extension skills are qualified by `chatgpt-as-provider:`.
 
 Luna is the default even when Astra is first in the account catalog. The calling agent selects reasoning effort; high effort alone keeps Luna. Astra is reserved for `task_difficulty: highly_difficult` or an explicit model choice. If the requested family is unavailable, the plugin reports an error. Model IDs come from the signed-in catalog, not hard-coded assumptions about model versions.
 

@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.6
+
+- Keep one Qwen extension with both qualified skills and remove the separate consultation shortcut command.
+
 ## 0.1.5
 
 - Hide the internal consultation skill from Qwen's slash menu while keeping it available for model invocation. Use `/chatgpt-ask` as the single user-facing command.
