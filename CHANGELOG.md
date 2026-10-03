@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.8
+
+- Keep opaque account aliases functional for account selection and sign-out without exposing identity subjects.
+
 ## 0.1.7
 
 - Remove personal identity and contact fields from extension-facing sign-in and account-list responses.

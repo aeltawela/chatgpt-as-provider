@@ -5,7 +5,7 @@
   },
   "metadata": {
     "description": "Ask ChatGPT or use it as a provider through the documented OAuth flow.",
-    "version": "0.1.7"
+    "version": "0.1.8"
   },
   "plugins": [
     {
@@ -15,9 +15,9 @@
         "repo": "aeltawela/chatgpt-as-provider"
       },
       "description": "ChatGPT OAuth consultation tool, skills and provider gateway.",
-      "version": "0.1.7",
+      "version": "0.1.8",
       "strict": true
     }
   ],
-  "version": "0.1.7"
+  "version": "0.1.8"
 }

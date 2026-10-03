@@ -40,7 +40,7 @@ export async function signIn({ launchBrowser = true, newAccount = false, account
   const state = randomText(), nonce = randomText(), verifier = randomText(48), challenge = pkceChallenge(verifier);
   const hostId = await writeHostId();
   const prior = await accounts();
-  const selected = accountSubject ? prior.find(a => a.subject === accountSubject) : prior.find(a => a.auth_method !== 'manual');
+  const selected = accountSubject ? selectedAccount(prior, accountSubject) : prior.find(a => a.auth_method !== 'manual');
   if (accountSubject && !selected) throw new Error('The selected ChatGPT account is not signed in. Choose an account from `accounts`.');
   if (selected?.auth_method === 'manual') throw new Error('Manual access tokens cannot be used for browser reauthorization. Start a new browser sign-in instead.');
   const clientId = (!newAccount && selected?.client_id) || 'dynamic_agent_client';
@@ -122,8 +122,14 @@ async function acquireRefreshLock(key) {
   }
   throw new Error('Timed out waiting for another process to refresh this ChatGPT session.');
 }
+function selectedAccount(all, selector) {
+  if (!selector) return all[0];
+  const match = /^account-(\d+)$/.exec(selector);
+  if (match) return all[Number(match[1]) - 1];
+  return all.find(a => a.subject === selector);
+}
 export async function usableAccount(subject, { fetcher = fetch } = {}) {
-  const all = await accounts(); let account = subject ? all.find(a => a.subject === subject) : all[0];
+  const all = await accounts(); let account = selectedAccount(all, subject);
   if (!account) throw new Error('No ChatGPT account is signed in. Run `chatgpt-as-provider login`.');
   if (account.auth_method === 'manual') {
     if (account.expires_at <= Date.now()) throw new Error('The manually entered access token has expired. Run `chatgpt-as-provider login --manual-token` again.');
@@ -144,4 +150,4 @@ export async function usableAccount(subject, { fetcher = fetch } = {}) {
   }
   return account;
 }
-export async function signOut(subject) { const all = await accounts(); for (const a of all.filter(x => !subject || x.subject === subject)) { if (a.refresh_token) { try { const body = new URLSearchParams({ token: a.refresh_token, token_type_hint: 'refresh_token' }); await fetch(`${authBase}/oauth/revoke`, { method: 'POST', headers: { 'content-type': 'application/x-www-form-urlencoded' }, body }); } catch {} } await removeAccount(a.subject); } }
+export async function signOut(subject) { const all = await accounts(); const selected = subject ? selectedAccount(all, subject) : null; for (const a of all.filter(x => !subject || x.subject === selected?.subject)) { if (a.refresh_token) { try { const body = new URLSearchParams({ token: a.refresh_token, token_type_hint: 'refresh_token' }); await fetch(`${authBase}/oauth/revoke`, { method: 'POST', headers: { 'content-type': 'application/x-www-form-urlencoded' }, body }); } catch {} } await removeAccount(a.subject); } }

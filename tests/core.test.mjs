@@ -56,6 +56,8 @@ test('account listings expose no identity or personal contact fields', async () 
   assert.ok(listed.length > 0);
   assert.deepEqual(Object.keys(listed[0]).sort(), ['account', 'auth_method']);
   assert.doesNotMatch(JSON.stringify(listed), /test@example\.invalid|sub-test/);
+  const account = await import('../src/oauth.mjs').then(m => m.usableAccount(listed[0].account));
+  assert.equal(account.subject, 'sub-test');
 });
 test('simultaneous requests serialize a rotating refresh token', async () => {
   await store.saveAccount({ subject: 'refresh-test', client_id: 'oaiapp-refresh', access_token: 'expired', refresh_token: 'rotate-me', expires_at: 0, scopes: ['chatgpt.tokens.use.direct'] });
