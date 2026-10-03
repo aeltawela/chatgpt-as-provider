@@ -164,4 +164,6 @@ export async function ask({ question, history, subject, model: requestedModel, r
 export async function getSavedSessions({ subject } = {}) { return (await loadSessions()).filter(s => !subject || s.subject === subject).map(({ id, subject: owner, model, createdAt, updatedAt }) => ({ id, subject: owner, model, createdAt, updatedAt })); }
 export async function deleteSavedSession(id, { subject } = {}) { const rows = await loadSessions(); const filtered = rows.filter(s => !(s.id === id && (!subject || s.subject === subject))); if (filtered.length === rows.length) return false; await saveSessions(filtered); return true; }
 export async function exportSavedSession(id, { subject } = {}) { const s = (await loadSessions()).find(x => x.id === id && (!subject || x.subject === subject)); if (!s) throw new Error('Saved conversation was not found.'); return JSON.stringify({ id: s.id, model: s.model, createdAt: s.createdAt, input: s.input }, null, 2); }
-export async function availableAccounts() { return (await accounts()).map(a => ({ subject: a.subject, email: a.email })); }
+export async function availableAccounts() {
+  return (await accounts()).map((a, index) => ({ account: `account-${index + 1}`, auth_method: a.auth_method }));
+}

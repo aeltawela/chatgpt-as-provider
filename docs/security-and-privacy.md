@@ -11,4 +11,5 @@
 - Sign-out deletes local credentials. Token revocation is best-effort; if OpenAI cannot be reached, disconnect the app in ChatGPT settings.
 - Manual tokens cannot be revoked by this application. Replace or revoke them at the system that issued them.
 - This application cannot control retention by OpenAI, the calling agent, terminal scrollback, backups or operating-system diagnostics. Consult the ChatGPT data and usage settings for account-level controls.
+- Extension tools never return email addresses, OAuth identity subjects, manual-token labels, or other personal account details to the calling agent. Authentication responses report only the sign-in method; account listings use non-identifying local positions such as `account-1`.
 - Optional telemetry, analytics, crash reporting and remote tracing are not implemented. No outbound network request occurs before sign-in except during an explicitly invoked OAuth or inference command.

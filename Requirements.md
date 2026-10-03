@@ -21,3 +21,4 @@
 18. Provide a direct Qwen consultation command that invokes the MCP tool without depending on the failing extension Skill lookup.
 19. Automated secret scanning must run on both push and pull-request events with the built-in read-only GitHub token, without posting comments.
 20. Qwen exposes one installed `chatgpt-as-provider` extension containing both qualified skills. Consultation is invoked as `/chatgpt-as-provider:ask-chatgpt`; no separate consultation command or extension is packaged.
+21. Extension-facing authentication and account responses must never expose email addresses, identity subjects, labels, or other personal information. They may report sign-in state, supported ChatGPT features, model catalog, and usage/quota information.

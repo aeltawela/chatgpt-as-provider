@@ -3,7 +3,7 @@
 Install the encapsulated package using Pi's package manager:
 
 ```sh
-pi install git:github.com/aeltawela/chatgpt-as-provider@v0.1.6
+pi install git:github.com/aeltawela/chatgpt-as-provider@v0.1.7
 ```
 
 This registers the native tools and both skills with Pi and includes the shared core. Use `chatgpt_login` once to open the official browser login. Update with `pi update --extensions` and remove with `pi remove git:github.com/aeltawela/chatgpt-as-provider`.

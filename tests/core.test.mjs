@@ -51,6 +51,12 @@ test('temporary conversation content is held in memory and caller may resume wit
 test('encrypted local key and credential modes are private', async () => {
   assert.equal((await stat(store.keyFile)).mode & 0o077, 0); assert.equal((await stat(store.credentialFile)).mode & 0o077, 0);
 });
+test('account listings expose no identity or personal contact fields', async () => {
+  const listed = await core.availableAccounts();
+  assert.ok(listed.length > 0);
+  assert.deepEqual(Object.keys(listed[0]).sort(), ['account', 'auth_method']);
+  assert.doesNotMatch(JSON.stringify(listed), /test@example\.invalid|sub-test/);
+});
 test('simultaneous requests serialize a rotating refresh token', async () => {
   await store.saveAccount({ subject: 'refresh-test', client_id: 'oaiapp-refresh', access_token: 'expired', refresh_token: 'rotate-me', expires_at: 0, scopes: ['chatgpt.tokens.use.direct'] });
   let count = 0; const fetcher = async (_url, options) => { count++; assert.match(String(options.body), /rotate-me/); await new Promise(r => setTimeout(r, 30)); return new Response(JSON.stringify({ access_token: 'fresh', refresh_token: 'rotated', expires_in: 3600, scope: 'chatgpt.tokens.use.direct' }), { status: 200 }); };

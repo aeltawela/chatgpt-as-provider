@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.7
+
+- Remove personal identity and contact fields from extension-facing sign-in and account-list responses.
+
 ## 0.1.6
 
 - Keep one Qwen extension with both qualified skills and remove the separate consultation shortcut command.

@@ -84,7 +84,7 @@ export async function signIn({ launchBrowser = true, newAccount = false, account
     const identity = await validateIdToken(tokens.id_token, { clientId: issuedId, nonce, fetcher });
     if (selected && selected.subject !== identity.sub) throw new Error('The signed-in identity does not match the selected ChatGPT account.');
     const account = { subject: identity.sub, email: identity.email || null, client_id: issuedId, ext_agent_host_id: hostId, issuer: identity.iss, id_token: tokens.id_token, access_token: tokens.access_token, refresh_token: tokens.refresh_token, token_type: tokens.token_type, expires_at: Date.now() + tokens.expires_in * 1000, scopes: scopesGranted, auth_method: 'oauth' };
-    await saveAccount(account); return { subject: account.subject, email: account.email };
+    await saveAccount(account); return { auth_method: 'oauth' };
   } finally { server.close(); }
 }
 export async function signInWithManualToken(token, { fetcher = fetch, label = null } = {}) {
@@ -98,7 +98,7 @@ export async function signInWithManualToken(token, { fetcher = fetch, label = nu
   const fingerprint = createHash('sha256').update(accessToken).digest('hex');
   const account = { subject: `manual:${fingerprint}`, email: label || null, client_id: null, ext_agent_host_id: await writeHostId(), issuer: 'manual-token', id_token: null, access_token: accessToken, refresh_token: null, token_type: 'Bearer', expires_at: expiresAt, scopes: ['manual-token'], auth_method: 'manual' };
   await saveAccount(account);
-  return { subject: account.subject, label: account.email, auth_method: 'manual' };
+  return { auth_method: 'manual' };
 }
 export async function refreshAccount(account, fetcher = fetch) {
   const body = new URLSearchParams({ grant_type: 'refresh_token', client_id: account.client_id, refresh_token: account.refresh_token, resource });

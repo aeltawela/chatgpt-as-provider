@@ -16,7 +16,7 @@ test('manual-token path verifies the bearer before encrypted local storage', asy
     called = true; assert.equal(url, 'https://api.openai.com/v1/models'); assert.equal(options.headers.authorization, `Bearer ${token}`);
     return new Response('{"data":[]}', { status: 200 });
   } });
-  assert.equal(called, true); assert.equal(result.auth_method, 'manual'); assert.equal(result.label, 'local test');
+  assert.equal(called, true); assert.deepEqual(result, { auth_method: 'manual' });
   const account = (await store.accounts())[0]; assert.equal(account.access_token, token); assert.equal(account.refresh_token, null);
   assert.doesNotMatch(await readFile(store.credentialFile, 'utf8'), new RegExp(token));
   await assert.rejects(oauth.signInWithManualToken(token, { fetcher: async () => new Response('{}', { status: 401 }) }), /was rejected/);
