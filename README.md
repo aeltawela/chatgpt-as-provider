@@ -16,7 +16,7 @@ Install it through the client’s normal extension or plugin manager. Each packa
 |---|---|---|---|
 | Qwen Code | `qwen extensions install https://github.com/aeltawela/chatgpt-as-provider` | `qwen extensions update chatgpt-as-provider` | `qwen extensions uninstall chatgpt-as-provider` |
 | OpenCode | `opencode plugin add github:aeltawela/chatgpt-as-provider` | `opencode plugin update chatgpt-as-provider` | `opencode plugin remove chatgpt-as-provider` |
-| Pi | `pi install git:github.com/aeltawela/chatgpt-as-provider@v0.1.4` | `pi update --extensions` | `pi remove git:github.com/aeltawela/chatgpt-as-provider` |
+| Pi | `pi install git:github.com/aeltawela/chatgpt-as-provider@v0.1.5` | `pi update --extensions` | `pi remove git:github.com/aeltawela/chatgpt-as-provider` |
 | Gemini CLI | `gemini extensions install https://github.com/aeltawela/chatgpt-as-provider` | `gemini extensions update chatgpt-as-provider` | `gemini extensions uninstall chatgpt-as-provider` |
 | Claude Code | `claude plugin marketplace add aeltawela/chatgpt-as-provider` then `claude plugin install chatgpt-as-provider@chatgpt-as-provider` | `claude plugin update chatgpt-as-provider@chatgpt-as-provider` | `claude plugin uninstall chatgpt-as-provider@chatgpt-as-provider` |
 

@@ -1,6 +1,7 @@
 ---
 name: ask-chatgpt
 description: Ask ChatGPT for a second opinion while keeping the current agent in control. Use when the user asks for another model's view or an independent check.
+user-invocable: false
 ---
 
 # Ask ChatGPT

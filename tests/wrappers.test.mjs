@@ -46,6 +46,8 @@ test('each harness uses its normal package installer and the package carries its
   assert.equal(qwen.commands, 'commands');
   const command = await readFile(new URL('../commands/chatgpt-ask.md', import.meta.url), 'utf8');
   assert.match(command, /\{\{args\}\}/); assert.match(command, /Do not invoke the Skill tool/);
+  const consultationSkill = await readFile(new URL('../skills/ask-chatgpt/SKILL.md', import.meta.url), 'utf8');
+  assert.match(consultationSkill, /user-invocable: false/);
   assert.match(qwen.mcpServers.chatgpt.args[0],/\$\{extensionPath\}.*src\/cli\.mjs/);
   assert.match(gemini.mcpServers.chatgpt.args[0],/\$\{extensionPath\}.*src\/cli\.mjs/);
   const claudePlugin=JSON.parse(await readFile(new URL('../.claude-plugin/plugin.json',import.meta.url),'utf8'));

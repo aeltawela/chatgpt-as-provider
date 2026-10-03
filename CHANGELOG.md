@@ -1,11 +1,16 @@
 # Changelog
 
+## 0.1.5
+
+- Hide the internal consultation skill from Qwen's slash menu while keeping it available for model invocation. Use `/chatgpt-ask` as the single user-facing command.
+
 ## 0.1.4
 
 - Preserve streamed text, citations and tool calls when the completion event omits output; reject truly empty completions without replay.
 - Default to the account's Luna model; reserve Astra for highly difficult tasks or an explicit model choice. Keep reasoning effort separate from model escalation.
 - Add Qwen's packaged `/chatgpt-ask` command to bypass bare-name Skill lookup failures.
 - Isolate wrapper tests from locally signed-in accounts and add sparse-stream/model-policy regressions.
+- Hide the internal consultation skill from Qwen's slash menu so it does not duplicate `/chatgpt-ask`.
 
 ## 0.1.3
 
